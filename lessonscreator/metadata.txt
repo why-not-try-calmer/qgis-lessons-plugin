@@ -1,10 +1,12 @@
 [general]
 name=LessonsCreator
 description=Tools to help create lessons for the Lessons plugin
-version=0.1
+version=0.1.0
 qgisMinimumVersion=2.0
 author=Victor Olaya
 email=volayaf@gmail.com
 website=
 icon=edit.png
 class_name=LessonsCollection
+tracker=https://github.com/planetfederal/qgis-lessons-plugin/issues
+repository=https://github.com/planetfederal/qgis-lessons-plugin

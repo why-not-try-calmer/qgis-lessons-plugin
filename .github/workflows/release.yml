@@ -1,0 +1,35 @@
+name: Release lessonscreator plugin
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get release version tag
+        id: version
+        run: echo "tag=${GITHUB_REF#refs/*/}" >> $GITHUB_OUTPUT
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9' 
+      
+      - name: Install dependencies
+        run: |
+          pip3 install -r requirements.txt
+          pip3 install qgis-plugin-ci
+      
+      - name: Package
+        run: |
+          qgis-plugin-ci package ${{ steps.version.outputs.tag }}
+
+      - name: Release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          file: lessonscreator.${{ steps.version.outputs.tag }}.zip
+          overwrite: true
